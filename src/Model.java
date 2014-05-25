@@ -269,18 +269,18 @@ public class Model {
 
 			if (VERBOSE) {
 				System.out.println("Beginning objective function.");
-				// ---begin objective function---
-				j = 0;
-				colno[j] = 1;
-				row[j++] = 0;
-
-				// set the objective function
-				lp.setObjFnex(j, row, colno);
-
-				// set the objective direction to maximise
-				lp.setMaxim();
-				// ---end objective function---
 			}
+			// ---begin objective function---
+			j = 0;
+			colno[j] = 1;
+			row[j++] = 0;
+
+			// set the objective function
+			lp.setObjFnex(j, row, colno);
+
+			// set the objective direction to maximise
+			lp.setMaxim();
+			// ---end objective function---
 
 			if (VERBOSE) {
 				System.out.println("Writing model to file.");

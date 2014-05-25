@@ -22,7 +22,7 @@ public class ControllingInterface {
 				op = new OutputParser("models/ExSolution" + iteration + ".dat", deltaL, deltaU);
 				csc = new CreateSquareConstraints("mat.dat", "squares.dat", deltaL, deltaU);
 				int ret = model.execute();
-				if(ret != 0) {
+				if (ret != 0) {
 					System.out.println("No solution");
 					break;
 				}
@@ -32,9 +32,8 @@ public class ControllingInterface {
 				System.out.println("Number of squares after iteration #" + iteration + ": " + csc.getNumberOfSquares());
 				System.out.println("Time spent on iteration #" + (iteration++) + ": " + (System.currentTimeMillis() - timeIt));
 				System.out.println("Total time so far: " + (System.currentTimeMillis() - time) + "\n");
-			} while(csc.getNumberOfSquares() > 0);
-		}
-		catch(LpSolveException e) {
+			} while (csc.getNumberOfSquares() > 0);
+		} catch (LpSolveException e) {
 			e.printStackTrace();
 		}
 		System.out.println("Solution found.");
