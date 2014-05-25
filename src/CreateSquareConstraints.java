@@ -92,7 +92,7 @@ public class CreateSquareConstraints {
 				w.print(oldConstraints);
 			}
 			if(cons.length() > 0) {
-				w.println(cons);
+				w.print(cons);
 			}
 			w.close();
 		}
