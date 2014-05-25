@@ -30,7 +30,7 @@ public class ControllingInterface {
 				op.write("mat.dat");
 				csc.createConstraints();
 				System.out.println("Number of squares after iteration #" + iteration + ": " + csc.getNumberOfSquares());
-				System.out.println("Time spent on iteration #" + (iteration++) + ": " + (System.currentTimeMillis() - timeIt) + "\n");
+				System.out.println("Time spent on iteration #" + (iteration++) + ": " + (System.currentTimeMillis() - timeIt));
 				System.out.println("Total time so far: " + (System.currentTimeMillis() - time) + "\n");
 			} while(csc.getNumberOfSquares() > 0);
 		}
