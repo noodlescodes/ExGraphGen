@@ -169,26 +169,26 @@ public class Model {
 			// ---end one 1 in each row/column of submatrix---
 
 			// ---begin no triangles constraints---
-			// if (VERBOSE) {
-			// System.out.println("Beginning no triangles constraints.");
-			// }
-			// j = 0;
-			// for (int i = 1; i <= nVertices; i++) {
-			// for (int j1 = i + 1; j1 <= nVertices; j1++) {
-			// for (int k = j1 + 1; k <= nVertices; k++) {
-			// if (i != j1 && j1 != k && i != k) {
-			// colno[j] = getIndex(i, j1);
-			// row[j++] = 1;
-			// colno[j] = getIndex(j1, k);
-			// row[j++] = 1;
-			// colno[j] = getIndex(i, k);
-			// row[j++] = 1;
-			// lp.addConstraintex(j, row, colno, LpSolve.LE, 2);
-			// }
-			// j = 0;
-			// }
-			// }
-			// }
+			if (VERBOSE) {
+				System.out.println("Beginning no triangles constraints.");
+			}
+			j = 0;
+			for (int i = 1; i <= nVertices; i++) {
+				for (int j1 = i + 1; j1 <= nVertices; j1++) {
+					for (int k = j1 + 1; k <= nVertices; k++) {
+						if (i != j1 && j1 != k && i != k) {
+							colno[j] = getIndex(i, j1);
+							row[j++] = 1;
+							colno[j] = getIndex(j1, k);
+							row[j++] = 1;
+							colno[j] = getIndex(i, k);
+							row[j++] = 1;
+							lp.addConstraintex(j, row, colno, LpSolve.LE, 2);
+						}
+						j = 0;
+					}
+				}
+			}
 			// ---end no triangles constraints---
 
 			// ---begin no square constraints---
@@ -212,55 +212,49 @@ public class Model {
 			// ---end no square constraints---
 
 			// ---begin orthogonal submatrix constraints---
-			// if (VERBOSE) {
-			// System.out.println("Beginning orthogonal submatrix constraints.");
-			// }
-			// j = 0;
-			// for (int j0 = deltaL + deltaU + 1; j0 <= deltaU + deltaL *
-			// deltaL; j0 += deltaL) {
-			// for (int i = deltaU + 1; i <= deltaU + deltaL * (deltaL - 1); i
-			// += deltaL) {
-			// for (int k = i + deltaL; k < deltaU + deltaL * deltaL; k +=
-			// deltaL) {
-			// int[][] top = getSubMatrix(i, j0);
-			// int[][] bottom = getSubMatrix(k, j0);
-			// for (int m = 0; m < top.length; m++) {
-			// for (int n = 0; n < top[m].length; n++) {
-			// colno[j] = top[m][n];
-			// row[j++] = 1;
-			// colno[j] = bottom[m][n];
-			// row[j++] = 1;
-			// lp.addConstraintex(j, row, colno, LpSolve.LE, 1);
-			//
-			// j = 0;
-			// }
-			// }
-			// }
-			// }
-			// }
-			// j = 0;
-			// for (int j0 = deltaL + deltaU + 1; j0 <= deltaU + deltaL *
-			// deltaL; j0 += deltaL) {
-			// for (int i = deltaU + 1; i <= deltaU + deltaL * (deltaL - 1); i
-			// += deltaL) {
-			// for (int k = i + deltaL; k <= deltaU + deltaL * deltaL; k +=
-			// deltaL) {
-			// int[][] top = getSubMatrix(j0, i);
-			// int[][] bottom = getSubMatrix(j0, k);
-			// for (int m = 0; m < top.length; m++) {
-			// for (int n = 0; n < top[m].length; n++) {
-			// colno[j] = top[m][n];
-			// row[j++] = 1;
-			// colno[j] = bottom[m][n];
-			// row[j++] = 1;
-			// lp.addConstraintex(j, row, colno, LpSolve.LE, 1);
-			//
-			// j = 0;
-			// }
-			// }
-			// }
-			// }
-			// }
+			if (VERBOSE) {
+				System.out.println("Beginning orthogonal submatrix constraints.");
+			}
+			j = 0;
+			for (int j0 = deltaL + deltaU + 1; j0 <= deltaU + deltaL * deltaL; j0 += deltaL) {
+				for (int i = deltaU + 1; i <= deltaU + deltaL * (deltaL - 1); i += deltaL) {
+					for (int k = i + deltaL; k < deltaU + deltaL * deltaL; k += deltaL) {
+						int[][] top = getSubMatrix(i, j0);
+						int[][] bottom = getSubMatrix(k, j0);
+						for (int m = 0; m < top.length; m++) {
+							for (int n = 0; n < top[m].length; n++) {
+								colno[j] = top[m][n];
+								row[j++] = 1;
+								colno[j] = bottom[m][n];
+								row[j++] = 1;
+								lp.addConstraintex(j, row, colno, LpSolve.LE, 1);
+
+								j = 0;
+							}
+						}
+					}
+				}
+			}
+			j = 0;
+			for (int j0 = deltaL + deltaU + 1; j0 <= deltaU + deltaL * deltaL; j0 += deltaL) {
+				for (int i = deltaU + 1; i <= deltaU + deltaL * (deltaL - 1); i += deltaL) {
+					for (int k = i + deltaL; k <= deltaU + deltaL * deltaL; k += deltaL) {
+						int[][] top = getSubMatrix(j0, i);
+						int[][] bottom = getSubMatrix(j0, k);
+						for (int m = 0; m < top.length; m++) {
+							for (int n = 0; n < top[m].length; n++) {
+								colno[j] = top[m][n];
+								row[j++] = 1;
+								colno[j] = bottom[m][n];
+								row[j++] = 1;
+								lp.addConstraintex(j, row, colno, LpSolve.LE, 1);
+
+								j = 0;
+							}
+						}
+					}
+				}
+			}
 			// ---end orthogonal submatrix constraints---
 
 			// ---begin correct row sum constraints---
