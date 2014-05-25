@@ -2,7 +2,7 @@ import lpsolve.LpSolveException;
 
 public class ControllingInterface {
 	public static void main(String[] args) {
-		int deltaL = 6;
+		int deltaL = 7;
 		int deltaU = deltaL + 1;
 
 		Model model;
@@ -35,6 +35,7 @@ public class ControllingInterface {
 			} while(csc.getNumberOfSquares() > 0);
 		}
 		catch(LpSolveException e) {
+			e.printStackTrace();
 		}
 		System.out.println("Solution found.");
 		System.out.println("Time taken: " + (System.currentTimeMillis() - time));
